@@ -189,6 +189,16 @@ export default function Home() {
               O Espaço Church Jobs nasceu do desejo de fortalecer os laços profissionais dentro da nossa comunidade.
               Acreditamos que ao apoiar os negócios e talentos dos nossos membros, crescemos todos juntos.
             </p>
+
+            {/* Imagem exclusiva para Mobile (entre texto e cards) */}
+            <div className={`${styles.infoImage} ${styles.mobileOnly}`}>
+              <img
+                src="/semear.jpg"
+                alt="Comunidade"
+                style={{ width: '100%', display: 'block' }}
+              />
+            </div>
+
             <div className={styles.infoCards}>
               <div className={styles.infoCard}>
                 <div className={styles.infoCardIcon}><Handshake size={24} weight="bold" /></div>
@@ -206,7 +216,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div style={{ borderRadius: '2rem', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
+          
+          {/* Imagem exclusiva para Desktop (lateral) */}
+          <div className={`${styles.infoImage} ${styles.desktopOnly}`}>
             <img
               src="/semear.jpg"
               alt="Comunidade"
@@ -219,13 +231,32 @@ export default function Home() {
       {/* Como Funciona Section */}
       <section ref={howRef} className={styles.infoSection} style={{ background: 'var(--secondary)' }}>
         <div className={styles.infoGrid}>
-          <div style={{ order: 2 }}>
+          {/* Imagem exclusiva para Desktop (Lado Esquerdo no Web) */}
+          <div className={`${styles.infoImage} ${styles.desktopOnly}`}>
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop"
+              alt="Como funciona"
+              style={{ width: '100%', display: 'block' }}
+            />
+          </div>
+
+          <div>
             <div className={styles.infoText}>
               <h2>Como Funciona</h2>
               <p>
                 Navegar pela plataforma é simples e intuitivo. Nosso objetivo é que você encontre
                 a solução que precisa em poucos cliques.
               </p>
+
+              {/* Imagem exclusiva para Mobile (Abaixo do texto) */}
+              <div className={`${styles.infoImage} ${styles.mobileOnly}`}>
+                <img
+                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop"
+                  alt="Como funciona"
+                  style={{ width: '100%', display: 'block' }}
+                />
+              </div>
+
               <div className={styles.infoCards}>
                 <div className={styles.infoCard}>
                   <div className={styles.infoCardIcon}><MagnifyingGlass size={24} weight="bold" /></div>
@@ -250,13 +281,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
-          <div style={{ order: 1, borderRadius: '2rem', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
-            <img
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop"
-              alt="Como funciona"
-              style={{ width: '100%', display: 'block' }}
-            />
           </div>
         </div>
       </section>
