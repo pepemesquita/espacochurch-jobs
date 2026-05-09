@@ -65,6 +65,15 @@ export default function Home() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Block body scroll when modal is open
+  useEffect(() => {
+    if (selectedProfile) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [selectedProfile]);
+
   useEffect(() => {
     fetchProfiles();
   }, []);
@@ -321,16 +330,19 @@ export default function Home() {
           {filteredProfiles.map(profile => (
             <div key={profile.id} className={styles.card}>
               <img src={profile.avatar_url || 'https://via.placeholder.com/150'} alt={profile.full_name} className={styles.cardAvatar} />
-              <h3 className={styles.cardName}>{profile.full_name}</h3>
-              <div className={styles.cardArea}>{profile.role_area}</div>
-              <p className={styles.cardBio}>{profile.bio}</p>
+              
+              <div className={styles.cardContent}>
+                <h3 className={styles.cardName}>{profile.full_name}</h3>
+                <div className={styles.cardArea}>{profile.role_area}</div>
+                <p className={styles.cardBio}>{profile.bio}</p>
+              </div>
 
               <button
                 className={styles.buttonDetail}
                 onClick={() => setSelectedProfile(profile)}
               >
                 <Eye size={18} weight="bold" />
-                Ver Perfil
+                <span>Ver Perfil</span>
               </button>
 
               <div className={styles.cardLinks}>
