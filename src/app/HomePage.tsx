@@ -108,6 +108,29 @@ export default function Home() {
     cat.toLowerCase().includes(categorySearch.toLowerCase())
   );
 
+  // Helper functions for links
+  const formatWhatsApp = (phone: string) => {
+    if (!phone) return "";
+    const cleanNumber = phone.replace(/\D/g, "");
+    // Add 55 if it's a BR number without DDI
+    const finalNumber = cleanNumber.length <= 11 ? `55${cleanNumber}` : cleanNumber;
+    const message = encodeURIComponent("Oi, irmã(o) tudo bem? Vim pelo Espaço Church Jobs e fiquei interessado no seu trabalho.");
+    return `https://wa.me/${finalNumber}?text=${message}`;
+  };
+
+  const formatInstagram = (handle: string) => {
+    if (!handle) return "";
+    const cleanHandle = handle.replace("@", "");
+    if (handle.startsWith("http")) return handle;
+    return `https://instagram.com/${cleanHandle}`;
+  };
+
+  const formatLinkedIn = (url: string) => {
+    if (!url) return "";
+    if (url.startsWith("http")) return url;
+    return `https://linkedin.com/in/${url}`;
+  };
+
   return (
     <main className={styles.main}>
       {/* Header */}
@@ -310,13 +333,13 @@ export default function Home() {
               </button>
 
               <div className={styles.cardLinks}>
-                <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" className={styles.linkIcon} title="WhatsApp">
+                <a href={formatWhatsApp(profile.whatsapp)} target="_blank" rel="noopener noreferrer" className={styles.linkIcon} title="WhatsApp">
                   <WhatsappLogo size={20} weight="fill" />
                 </a>
-                <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className={styles.linkIcon} title="LinkedIn">
+                <a href={formatLinkedIn(profile.linkedin)} target="_blank" rel="noopener noreferrer" className={styles.linkIcon} title="LinkedIn">
                   <LinkedinLogo size={20} weight="fill" />
                 </a>
-                <a href={profile.instagram} target="_blank" rel="noopener noreferrer" className={styles.linkIcon} title="Instagram">
+                <a href={formatInstagram(profile.instagram)} target="_blank" rel="noopener noreferrer" className={styles.linkIcon} title="Instagram">
                   <InstagramLogo size={20} weight="fill" />
                 </a>
               </div>
@@ -348,7 +371,7 @@ export default function Home() {
 
               <div className={styles.modalActions}>
                 <a
-                  href={selectedProfile.whatsapp}
+                  href={formatWhatsApp(selectedProfile.whatsapp)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.buttonPrimary}
@@ -356,10 +379,16 @@ export default function Home() {
                   <WhatsappLogo size={22} weight="bold" />
                   WhatsApp
                 </a>
-                <button className={styles.buttonOutline} onClick={() => handleAuthAction("Enviar E-mail")}>
-                  <Envelope size={22} weight="bold" />
-                  E-mail
-                </button>
+                {selectedProfile.website && (
+                  <a 
+                    href={`mailto:${selectedProfile.website}`}
+                    className={styles.buttonOutline}
+                    style={{ textTransform: 'lowercase', fontSize: '0.9rem' }}
+                  >
+                    <Envelope size={22} weight="bold" />
+                    {selectedProfile.website}
+                  </a>
+                )}
               </div>
             </div>
           </div>
