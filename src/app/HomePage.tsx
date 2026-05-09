@@ -76,12 +76,13 @@ export default function Home() {
   }, [selectedProfile]);
 
   useEffect(() => {
-    fetchProfiles();
-    
-    // Check initial session
-    supabase.auth.getSession().then(({ data }) => {
+    const checkSession = async () => {
+      const { data } = await supabase.auth.getSession();
       setUser(data.session?.user ?? null);
-    });
+    };
+
+    fetchProfiles();
+    checkSession();
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
