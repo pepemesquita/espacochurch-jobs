@@ -46,8 +46,7 @@ export default function ProfilePage() {
     whatsapp: "",
     linkedin: "",
     instagram: "",
-    publicEmail: "",
-    portfolio: ""
+    website: ""
   });
 
   useEffect(() => {
@@ -80,8 +79,7 @@ export default function ProfilePage() {
         whatsapp: profile?.whatsapp || metadata?.whatsapp || "",
         linkedin: profile?.linkedin || metadata?.linkedin || "",
         instagram: profile?.instagram || metadata?.instagram || "",
-        publicEmail: profile?.public_email || metadata?.public_email || "",
-        portfolio: profile?.portfolio || metadata?.portfolio || ""
+        website: profile?.website || metadata?.website || ""
       });
       
       setPreviewUrl(profile?.avatar_url || metadata?.avatar_url || null);
@@ -179,8 +177,7 @@ export default function ProfilePage() {
           whatsapp: formData.whatsapp,
           linkedin: formData.linkedin,
           instagram: formData.instagram,
-          portfolio: formData.portfolio,
-          public_email: formData.publicEmail
+          website: formData.website
         }
       });
 
@@ -198,8 +195,7 @@ export default function ProfilePage() {
           whatsapp: formData.whatsapp,
           linkedin: formData.linkedin,
           instagram: formData.instagram,
-          portfolio: formData.portfolio,
-          public_email: formData.publicEmail,
+          website: formData.website,
           updated_at: new Date().toISOString()
         });
 
@@ -370,23 +366,13 @@ export default function ProfilePage() {
                   />
                 </div>
                 <div className={styles.inputGroup}>
-                  <label htmlFor="email_public">E-mail Público</label>
-                  <input 
-                    type="email" 
-                    id="email_public" 
-                    placeholder="contato@exemplo.com" 
-                    value={formData.publicEmail}
-                    onChange={(e) => setFormData({...formData, publicEmail: e.target.value})}
-                  />
-                </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="portfolio"><Globe size={18} /> Site ou Portfólio</label>
+                  <label htmlFor="website"><Globe size={18} /> Site ou Portfólio</label>
                   <input 
                     type="url" 
-                    id="portfolio" 
+                    id="website" 
                     placeholder="https://meusite.com" 
-                    value={formData.portfolio}
-                    onChange={(e) => setFormData({...formData, portfolio: e.target.value})}
+                    value={formData.website}
+                    onChange={(e) => setFormData({...formData, website: e.target.value})}
                   />
                 </div>
               </div>

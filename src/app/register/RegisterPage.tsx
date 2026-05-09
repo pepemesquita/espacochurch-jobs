@@ -33,8 +33,7 @@ export default function RegisterPage() {
     whatsapp: "",
     linkedin: "",
     instagram: "",
-    publicEmail: "",
-    portfolio: "",
+    website: "",
     email: "",
     password: "",
     confirmPassword: ""
@@ -139,8 +138,7 @@ export default function RegisterPage() {
             whatsapp: formData.whatsapp,
             linkedin: formData.linkedin,
             instagram: formData.instagram,
-            portfolio: formData.portfolio,
-            public_email: formData.publicEmail
+            website: formData.website
           }
         }
       });
@@ -362,23 +360,13 @@ export default function RegisterPage() {
                   />
                 </div>
                 <div className={styles.inputGroup}>
-                  <label htmlFor="email_public">E-mail Público</label>
-                  <input 
-                    type="email" 
-                    id="email_public" 
-                    placeholder="contato@exemplo.com" 
-                    value={formData.publicEmail}
-                    onChange={(e) => setFormData({...formData, publicEmail: e.target.value})}
-                  />
-                </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="portfolio"><Globe size={18} /> Site ou Portfólio (Opcional)</label>
+                  <label htmlFor="website"><Globe size={18} /> Site ou Portfólio (Opcional)</label>
                   <input 
                     type="url" 
-                    id="portfolio" 
+                    id="website" 
                     placeholder="https://meusite.com" 
-                    value={formData.portfolio}
-                    onChange={(e) => setFormData({...formData, portfolio: e.target.value})}
+                    value={formData.website}
+                    onChange={(e) => setFormData({...formData, website: e.target.value})}
                   />
                 </div>
               </div>

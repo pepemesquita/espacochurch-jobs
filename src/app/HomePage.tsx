@@ -439,21 +439,10 @@ export default function Home() {
                   WhatsApp
                 </a>
                 
-                {selectedProfile.public_email && (
-                  <a 
-                    href={`mailto:${selectedProfile.public_email}`}
-                    className={styles.buttonOutline}
-                    style={{ textTransform: 'lowercase', fontSize: '0.85rem' }}
-                    title={selectedProfile.public_email}
-                  >
-                    <Envelope size={22} weight="bold" />
-                    {selectedProfile.public_email}
-                  </a>
-                )}
 
-                {selectedProfile.portfolio && (
+                {selectedProfile.website && (
                   <a 
-                    href={selectedProfile.portfolio.startsWith('http') ? selectedProfile.portfolio : `https://${selectedProfile.portfolio}`}
+                    href={selectedProfile.website.startsWith('http') ? selectedProfile.website : `https://${selectedProfile.website}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.buttonOutline}
