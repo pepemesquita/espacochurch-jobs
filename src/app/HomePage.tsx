@@ -20,7 +20,8 @@ import {
   UserPlus,
   Briefcase,
   CaretDown,
-  Tag
+  Tag,
+  Globe
 } from "@phosphor-icons/react";
 
 import { useEffect } from "react";
@@ -379,14 +380,28 @@ export default function Home() {
                   <WhatsappLogo size={22} weight="bold" />
                   WhatsApp
                 </a>
-                {selectedProfile.website && (
+                
+                {selectedProfile.public_email && (
                   <a 
-                    href={`mailto:${selectedProfile.website}`}
+                    href={`mailto:${selectedProfile.public_email}`}
                     className={styles.buttonOutline}
-                    style={{ textTransform: 'lowercase', fontSize: '0.9rem' }}
+                    style={{ textTransform: 'lowercase', fontSize: '0.85rem' }}
+                    title={selectedProfile.public_email}
                   >
                     <Envelope size={22} weight="bold" />
-                    {selectedProfile.website}
+                    {selectedProfile.public_email}
+                  </a>
+                )}
+
+                {selectedProfile.website && (
+                  <a 
+                    href={selectedProfile.website.startsWith('http') ? selectedProfile.website : `https://${selectedProfile.website}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.buttonOutline}
+                  >
+                    <Globe size={22} weight="bold" />
+                    Site / Portfólio
                   </a>
                 )}
               </div>

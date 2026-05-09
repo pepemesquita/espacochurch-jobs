@@ -656,22 +656,75 @@
     opacity: 1;
     transform: translateY(0) scale(1);
   }
-}
-
-@media (max-width: 968px) {
+}@media (max-width: 968px) {
   .footerContent {
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
   }
+  .infoGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
 }
 
 @media (max-width: 768px) {
+  .header {
+    padding: 0.75rem 4%;
+  }
+  
+  .logo {
+    font-size: 1.1rem !important;
+    max-width: 120px;
+  }
+
+  .nav {
+    gap: 0.5rem;
+  }
+
+  .buttonPrimary, .buttonOutline {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.75rem;
+    height: auto;
+  }
+
   .heroTitle {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   }
 
   .heroActions {
     flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .directorySection {
+    padding: 3rem 1rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem;
+  }
+
+  /* Modal Mobile Fixes */
+  .modalContent {
+    width: 95%;
+    margin: 0;
+    max-height: 90vh;
+  }
+
+  .modalActions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .modalActions a, .modalActions button {
+    width: 100% !important;
+    justify-content: center;
+    padding: 0.75rem !important;
+    font-size: 0.875rem !important;
   }
 
   .footerContent {
@@ -694,85 +747,14 @@
     text-align: center;
   }
 }
-
-/* Content Sections */
-.infoSection {
-  padding: 6rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.infoGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.infoText h2 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--primary);
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.025em;
-}
-
-.infoText p {
-  font-size: 1.125rem;
-  line-height: 1.8;
-  color: #475569;
-  margin-bottom: 2rem;
-}
-
-.infoCards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-.infoCard {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  border: 1px solid var(--card-border);
-  display: flex;
-  gap: 1.25rem;
-  transition: var(--transition);
-}
-
-.infoCard:hover {
-  transform: translateX(10px);
-  border-color: var(--primary-light);
-}
-
-.infoCardIcon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: var(--primary-glow);
-  color: var(--primary-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.infoCardText h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-  color: var(--primary);
-}
-
-.infoCardText p {
-  font-size: 0.95rem;
-  color: #64748b;
-  margin-bottom: 0;
-}
-
-@media (max-width: 968px) {
-  .infoGrid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-}
+/* Restored Content Sections */
+.infoSection { padding: 6rem 5%; max-width: 1200px; margin: 0 auto; }
+.infoGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.infoText h2 { font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 1.5rem; letter-spacing: -0.025em; }
+.infoText p { font-size: 1.125rem; line-height: 1.8; color: #475569; margin-bottom: 2rem; }
+.infoCards { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+.infoCard { background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--card-border); display: flex; gap: 1.25rem; transition: var(--transition); }
+.infoCard:hover { transform: translateX(10px); border-color: var(--primary-light); }
+.infoCardIcon { width: 48px; height: 48px; border-radius: 12px; background: var(--primary-glow); color: var(--primary-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.infoCardText h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--primary); }
+.infoCardText p { font-size: 0.95rem; color: #64748b; margin-bottom: 0; }
