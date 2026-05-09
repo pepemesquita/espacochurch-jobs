@@ -77,6 +77,18 @@ export default function Home() {
 
   useEffect(() => {
     fetchProfiles();
+    
+    // Check initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   async function fetchProfiles() {
@@ -148,14 +160,23 @@ export default function Home() {
       <header className={styles.header}>
         <div className={styles.logo}>Espaço Church Jobs</div>
         <nav className={styles.nav}>
-          <Link href="/login" className={styles.buttonOutline}>
-            <SignIn size={20} weight="bold" />
-            Entrar
-          </Link>
-          <Link href="/register" className={styles.buttonPrimary}>
-            <UserPlus size={20} weight="bold" />
-            Cadastrar Perfil
-          </Link>
+          {user ? (
+            <Link href="/profile" className={styles.buttonOutline}>
+              <Briefcase size={20} weight="bold" />
+              Meu Perfil
+            </Link>
+          ) : (
+            <>
+              <Link href="/login" className={styles.buttonOutline}>
+                <SignIn size={20} weight="bold" />
+                Entrar
+              </Link>
+              <Link href="/register" className={styles.buttonPrimary}>
+                <UserPlus size={20} weight="bold" />
+                Cadastrar Perfil
+              </Link>
+            </>
+          )}
         </nav>
       </header>
 
