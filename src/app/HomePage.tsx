@@ -79,8 +79,8 @@ export default function Home() {
     fetchProfiles();
     
     // Check initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
+    supabase.auth.getSession().then(({ data }) => {
+      setUser(data.session?.user ?? null);
     });
 
     // Listen for auth changes
