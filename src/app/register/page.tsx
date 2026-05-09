@@ -1,105 +1,11 @@
-"use client";
+import { Metadata } from "next";
+import RegisterPage from "./RegisterPage";
 
-import styles from "./register.module.css";
-import Link from "next/link";
-import { UserPlus, CaretLeft, CloudArrowUp, WhatsappLogo, LinkedinLogo, InstagramLogo } from "@phosphor-icons/react";
+export const metadata: Metadata = {
+  title: "Cadastrar Perfil",
+  description: "Crie seu perfil profissional no Espaço Church Jobs e mostre suas habilidades para toda a comunidade de Pelotas.",
+};
 
-const CATEGORIES = [
-  "Advocacia", "Arquitetura", "Artesanato", "Assistência Técnica", "Beleza & Estética", 
-  "Consultoria", "Contabilidade", "Construção", "Design", "Direito", "Educação", 
-  "Elétrica", "Engenharia", "Eventos", "Fotografia", "Fretes & Mudanças", 
-  "Gastronomia", "Gestão", "Imóveis", "Informática", "Jardinagem", "Limpeza", 
-  "Logística", "Manutenção", "Marketing", "Marcenaria", "Mecânica", "Moda", 
-  "Música", "Nutrição", "Odontologia", "Pintura", "Pet Shop", "Produção", 
-  "Psicologia", "Recursos Humanos", "Reformas", "Saúde", "Seguros", "Serviços", 
-  "Tecnologia", "Tradução", "Turismo", "Vendas", "Viagens", "Vídeo"
-].sort();
-
-export default function RegisterPage() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        <Link href="/" className={styles.backButton}>
-          <CaretLeft size={20} weight="bold" />
-          Voltar para Home
-        </Link>
-        
-        <div className={styles.content}>
-          <div className={styles.header}>
-            <div className={styles.badge}>Novo Profissional</div>
-            <h1>Cadastre seu Perfil</h1>
-            <p>Faça parte da rede de talentos da nossa comunidade e seja encontrado por quem precisa dos seus serviços.</p>
-          </div>
-          
-          <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-            <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>Informações Básicas</h2>
-              <div className={styles.uploadContainer}>
-                <div className={styles.avatarPlaceholder}>
-                  <CloudArrowUp size={32} />
-                </div>
-                <div className={styles.uploadText}>
-                  <h3>Foto de Perfil</h3>
-                  <p>PNG ou JPG até 5MB. Recomendado 400x400px.</p>
-                  <button type="button" className={styles.uploadButton}>Upload</button>
-                </div>
-              </div>
-              
-              <div className={styles.inputGrid}>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="name">Nome Completo</label>
-                  <input type="text" id="name" placeholder="Como você é conhecido" required />
-                </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="category">Categoria / Nicho</label>
-                  <select id="category" required>
-                    <option value="">Selecione uma área</option>
-                    {CATEGORIES.map(cat => (
-                      <option key={cat} value={cat}>{cat}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              
-              <div className={styles.inputGroup}>
-                <label htmlFor="bio">Bio Profissional</label>
-                <textarea id="bio" rows={4} placeholder="Conte um pouco sobre sua experiência e o que você oferece..." required></textarea>
-                <span className={styles.inputHint}>Máximo 200 caracteres.</span>
-              </div>
-            </section>
-            
-            <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>Contatos e Redes</h2>
-              <div className={styles.inputGrid}>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="whatsapp"><WhatsappLogo size={18} weight="fill" /> WhatsApp</label>
-                  <input type="text" id="whatsapp" placeholder="(00) 00000-0000" />
-                </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="linkedin"><LinkedinLogo size={18} weight="fill" /> LinkedIn (URL)</label>
-                  <input type="url" id="linkedin" placeholder="https://linkedin.com/in/..." />
-                </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="instagram"><InstagramLogo size={18} weight="fill" /> Instagram (@)</label>
-                  <input type="text" id="instagram" placeholder="@seuusuario" />
-                </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="email">E-mail Público</label>
-                  <input type="email" id="email" placeholder="contato@exemplo.com" />
-                </div>
-              </div>
-            </section>
-            
-            <div className={styles.formFooter}>
-              <p>Ao se cadastrar, você concorda com nossos Termos de Uso e Política de Privacidade.</p>
-              <button type="submit" className={styles.submitButton}>
-                <UserPlus size={22} weight="bold" />
-                Criar Perfil Profissional
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </main>
-  );
+export default function Page() {
+  return <RegisterPage />;
 }
