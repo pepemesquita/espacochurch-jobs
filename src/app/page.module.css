@@ -743,66 +743,76 @@ body {
     margin: 0 auto;
   }
 
-  /* LIST VIEW STRATEGY */
+  /* RESTAURAÇÃO: Voltar ao visual de cartões completos no Mobile */
   .grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 0 4%;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    padding: 0 4% !important;
   }
 
   .card {
-    flex-direction: row !important;
-    text-align: left !important;
-    padding: 1rem !important;
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 2.5rem 1.5rem !important;
     align-items: center !important;
-    gap: 1rem !important;
-    border-radius: 1.25rem !important;
+    gap: 0 !important;
+    border-radius: var(--radius) !important;
   }
 
   .cardAvatar {
-    width: 64px !important;
-    height: 64px !important;
-    margin: 0 !important;
-    border-width: 2px !important;
+    width: 100px !important;
+    height: 100px !important;
+    margin: 0 auto 1.5rem !important;
+    border-width: 4px !important;
   }
 
   .cardContent {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    text-align: left;
+    width: 100% !important;
+    text-align: center !important;
   }
 
   .cardName {
-    font-size: 1.05rem !important;
-    margin: 0 !important;
+    font-size: 1.25rem !important;
+    margin: 0 0 0.25rem 0 !important;
   }
 
   .cardArea {
-    font-size: 0.65rem !important;
-    margin: 0 !important;
-    opacity: 0.8;
+    font-size: 0.875rem !important;
+    margin: 0 0 1rem 0 !important;
   }
 
   .cardBio,
   .cardLinks {
-    display: none !important;
-    /* Hide details on mobile list to improve scannability */
+    display: flex !important; /* Voltando a mostrar bio e links sociais */
+    justify-content: center !important;
+  }
+
+  .cardBio {
+    margin-bottom: 1.5rem !important;
   }
 
   .buttonDetail {
-    margin: 0 !important;
-    width: auto !important;
-    padding: 0.4rem 0.75rem !important;
-    font-size: 0.7rem !important;
-    height: 36px;
+    margin-top: 1.5rem !important;
+    width: 100% !important;
+    padding: 0.75rem !important;
+    font-size: 0.95rem !important;
+    height: auto !important;
   }
 
   .buttonDetail span {
-    display: none;
-    /* Show only icon on very small buttons or keep it short */
+    display: inline !important; /* Volta o texto 'Ver Perfil' */
+  }
+
+  /* FIX DEFINITIVO: Imagens Responsivas Sem Duplicidade */
+  .infoImage.mobileOnly {
+    display: block !important;
+    width: 100% !important;
+    margin: 1.5rem 0 !important;
+  }
+
+  .infoImage.desktopOnly {
+    display: none !important;
   }
 
   .directorySection {
@@ -827,58 +837,36 @@ body {
     padding: 0.8rem !important;
   }
 
-  /* Info Cards as List Items */
-  .infoGrid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .infoCard {
-    padding: 1rem;
-    gap: 1rem;
-  }
-
-  .infoCardIcon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .infoCardText h3 {
-    font-size: 0.95rem;
-  }
-
-  .infoCardText p {
-    font-size: 0.8rem;
-  }
-
-  .footerContent {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 2.5rem;
-  }
-
-  .footerSocials {
-    justify-content: center;
-  }
-
-  .infoImage {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 1.5rem 0 0 0 !important;
-    order: 2 !important;
-    position: relative !important;
-    left: 0 !important;
-    transform: none !important;
-  }
-
   .infoGrid {
     display: flex !important;
     flex-direction: column !important;
     gap: 2rem !important;
     width: 100% !important;
+    align-items: center !important; /* Centraliza os filhos horizontalmente */
+    text-align: center !important;
+  }
+
+  .infoGrid > div {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .infoText {
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .infoCards {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
     align-items: center !important;
+  }
+
+  .infoCard {
+    width: 100% !important;
+    max-width: 400px; /* Limite para não ficar gigante em tablets */
+    text-align: left !important;
   }
 
   .infoGrid>div {
