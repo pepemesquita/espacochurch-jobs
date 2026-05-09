@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Espaço Church Jobs
 
-## Getting Started
+Uma plataforma profissional independente e exclusiva para a comunidade **Espaço Church Pelotas**, projetada para conectar talentos, serviços e oportunidades de trabalho entre os membros e a cidade.
 
-First, run the development server:
+## 🚀 Sobre o Projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+O **Espaço Church Jobs** nasceu da necessidade de organizar e dar visibilidade aos profissionais da nossa comunidade. A plataforma funciona como um diretório inteligente, onde cada membro pode cadastrar seu perfil, descrever suas habilidades e facilitar o contato direto via WhatsApp ou LinkedIn.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Funcionalidades Principais
+- **🔍 Diretório Inteligente**: Busca por mais de 50 categorias profissionais com filtro em tempo real.
+- **👤 Perfis Detalhados**: Cartões profissionais com bio, área de atuação e links sociais.
+- **🔐 Área do Membro**: Sistema de autenticação (Login/Cadastro) integrado ao Supabase.
+- **📱 Cadastro Simplificado**: Formulário dedicado para novos profissionais inserirem seus dados.
+- **💎 Design Premium**: Interface moderna, responsiva e focada na melhor experiência de uso (UX).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tecnologias Utilizadas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js 15 (App Router)**: Framework React para performance e SEO.
+- **TypeScript**: Garantia de robustez e segurança no código.
+- **Supabase**: Backend-as-a-Service para Banco de Dados e Autenticação.
+- **Phosphor Icons**: Iconografia profissional e consistente.
+- **CSS Modules**: Estilização isolada e otimizada.
 
-## Learn More
+## ⚙️ Configuração do Ambiente
 
-To learn more about Next.js, take a look at the following resources:
+1. **Instalação**:
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Banco de Dados**:
+   - Crie um projeto no [Supabase](https://supabase.com).
+   - Execute o script contido em `supabase_schema.sql` no SQL Editor do Supabase.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Variáveis de Ambiente**:
+   - Renomeie `.env.local.example` para `.env.local`.
+   - Adicione suas credenciais:
+     ```env
+     NEXT_PUBLIC_SUPABASE_URL=sua_url_aqui
+     NEXT_PUBLIC_SUPABASE_ANON_KEY=sua_chave_anon_aqui
+     ```
 
-## Deploy on Vercel
+4. **Execução**:
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📂 Estrutura de Pastas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/app/`: Rotas e páginas da aplicação (Home, Login, Register).
+- `src/lib/`: Configurações de bibliotecas externas (Supabase Client).
+- `public/`: Ativos estáticos e imagens.
+- `supabase_schema.sql`: Definição das tabelas e políticas de segurança (RLS).
+
+---
+
+*Desenvolvido com carinho para fortalecer a nossa comunidade.*
