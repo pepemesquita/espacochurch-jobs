@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import styles from "./register.module.css";
 import Link from "next/link";
-import { UserPlus, CaretLeft, CloudArrowUp, WhatsappLogo, LinkedinLogo, InstagramLogo, X, Lock, Envelope, Eye, EyeSlash } from "@phosphor-icons/react";
+import { UserPlus, CaretLeft, CloudArrowUp, WhatsappLogo, LinkedinLogo, InstagramLogo, X, Lock, Envelope, Eye, EyeSlash, Globe } from "@phosphor-icons/react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 
@@ -34,6 +34,7 @@ export default function RegisterPage() {
     linkedin: "",
     instagram: "",
     publicEmail: "",
+    portfolio: "",
     email: "",
     password: "",
     confirmPassword: ""
@@ -138,7 +139,8 @@ export default function RegisterPage() {
             whatsapp: formData.whatsapp,
             linkedin: formData.linkedin,
             instagram: formData.instagram,
-            website: formData.publicEmail
+            portfolio: formData.portfolio,
+            public_email: formData.publicEmail
           }
         }
       });
@@ -360,13 +362,23 @@ export default function RegisterPage() {
                   />
                 </div>
                 <div className={styles.inputGroup}>
-                  <label htmlFor="email">E-mail Público</label>
+                  <label htmlFor="email_public">E-mail Público</label>
                   <input 
                     type="email" 
-                    id="email" 
+                    id="email_public" 
                     placeholder="contato@exemplo.com" 
                     value={formData.publicEmail}
                     onChange={(e) => setFormData({...formData, publicEmail: e.target.value})}
+                  />
+                </div>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="portfolio"><Globe size={18} /> Site ou Portfólio (Opcional)</label>
+                  <input 
+                    type="url" 
+                    id="portfolio" 
+                    placeholder="https://meusite.com" 
+                    value={formData.portfolio}
+                    onChange={(e) => setFormData({...formData, portfolio: e.target.value})}
                   />
                 </div>
               </div>
