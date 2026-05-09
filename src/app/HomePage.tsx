@@ -46,6 +46,7 @@ export default function Home() {
   const [categorySearch, setCategorySearch] = useState("");
   const [selectedProfile, setSelectedProfile] = useState<any | null>(null);
   const [profiles, setProfiles] = useState<any[]>([]);
+  const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -429,9 +430,9 @@ export default function Home() {
                   </a>
                 )}
 
-                {selectedProfile.website && (
+                {selectedProfile.portfolio && (
                   <a 
-                    href={selectedProfile.website.startsWith('http') ? selectedProfile.website : `https://${selectedProfile.website}`}
+                    href={selectedProfile.portfolio.startsWith('http') ? selectedProfile.portfolio : `https://${selectedProfile.portfolio}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.buttonOutline}

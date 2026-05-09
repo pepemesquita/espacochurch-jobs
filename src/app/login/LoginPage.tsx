@@ -28,7 +28,7 @@ export default function LoginPage() {
 
       if (error) throw error;
       
-      router.push("/");
+      router.push("/profile");
     } catch (err: any) {
       setError("E-mail ou senha incorretos.");
       console.error(err);
