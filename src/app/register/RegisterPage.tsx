@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import styles from "./register.module.css";
 import Link from "next/link";
-import { UserPlus, CaretLeft, CloudArrowUp, WhatsappLogo, LinkedinLogo, InstagramLogo, X, Lock, Envelope } from "@phosphor-icons/react";
+import { UserPlus, CaretLeft, CloudArrowUp, WhatsappLogo, LinkedinLogo, InstagramLogo, X, Lock, Envelope, Eye, EyeSlash } from "@phosphor-icons/react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 
@@ -25,6 +25,7 @@ export default function RegisterPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     category: "",
@@ -34,7 +35,8 @@ export default function RegisterPage() {
     instagram: "",
     publicEmail: "",
     email: "",
-    password: ""
+    password: "",
+    confirmPassword: ""
   });
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -116,38 +118,33 @@ export default function RegisterPage() {
     setLoading(true);
     setError(null);
 
+    if (formData.password !== formData.confirmPassword) {
+      setError("As senhas não coincidem.");
+      setLoading(false);
+      return;
+    }
+
     try {
-      // 1. Create User in Auth
+      // 1. Create User in Auth with ALL metadata
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
         options: {
           data: {
             full_name: formData.name,
-            avatar_url: previewUrl
+            avatar_url: previewUrl,
+            role_area: formData.category,
+            bio: formData.bio,
+            whatsapp: formData.whatsapp,
+            linkedin: formData.linkedin,
+            instagram: formData.instagram,
+            website: formData.publicEmail
           }
         }
       });
 
       if (authError) throw authError;
       if (!authData.user) throw new Error("Erro ao criar usuário");
-
-      // 2. Update Profile with extra info
-      // The profile is created automatically by a trigger in DB, 
-      // but we need to update the other fields.
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .update({
-          role_area: formData.category,
-          bio: formData.bio,
-          whatsapp: formData.whatsapp,
-          linkedin: formData.linkedin,
-          instagram: formData.instagram,
-          website: formData.publicEmail // Using website field for public email or similar
-        })
-        .eq('id', authData.user.id);
-
-      if (profileError) throw profileError;
 
       alert("Cadastro realizado com sucesso! Bem-vindo à nossa comunidade.");
       router.push("/");
@@ -175,7 +172,7 @@ export default function RegisterPage() {
           </div>
 
           {error && (
-            <div style={{ color: '#ef4444', background: '#fef2f2', padding: '1rem', borderRadius: '0.75rem', marginBottom: '2rem', border: '1px solid #fee2e2' }}>
+            <div style={{ color: '#ef4444', background: '#fef2f2', padding: '1rem', borderRadius: '0.75rem', marginBottom: '2rem', border: '1px solid #fee2e2', textAlign: 'center' }}>
               {error}
             </div>
           )}
@@ -194,18 +191,48 @@ export default function RegisterPage() {
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
                   />
-                  <span className={styles.inputHint}>Será usado para login e gestão do seu perfil.</span>
                 </div>
                 <div className={styles.inputGroup}>
                   <label htmlFor="password_auth"><Lock size={18} /> Senha</label>
-                  <input 
-                    type="password" 
-                    id="password_auth" 
-                    placeholder="Mínimo 6 caracteres" 
-                    required 
-                    value={formData.password}
-                    onChange={(e) => setFormData({...formData, password: e.target.value})}
-                  />
+                  <div style={{ position: 'relative' }}>
+                    <input 
+                      type={showPassword ? "text" : "password"} 
+                      id="password_auth" 
+                      placeholder="Mínimo 6 caracteres" 
+                      required 
+                      value={formData.password}
+                      onChange={(e) => setFormData({...formData, password: e.target.value})}
+                      style={{ paddingRight: '3rem' }}
+                    />
+                    <button 
+                      type="button" 
+                      onClick={() => setShowPassword(!showPassword)}
+                      style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', display: 'flex', alignItems: 'center' }}
+                    >
+                      {showPassword ? <EyeSlash size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
+                </div>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="confirm_password"><Lock size={18} /> Confirmar Senha</label>
+                  <div style={{ position: 'relative' }}>
+                    <input 
+                      type={showPassword ? "text" : "password"} 
+                      id="confirm_password" 
+                      placeholder="Repita sua senha" 
+                      required 
+                      value={formData.confirmPassword}
+                      onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
+                      style={{ paddingRight: '3rem' }}
+                    />
+                    <button 
+                      type="button" 
+                      onClick={() => setShowPassword(!showPassword)}
+                      style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', display: 'flex', alignItems: 'center' }}
+                    >
+                      {showPassword ? <EyeSlash size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
                 </div>
               </div>
             </section>

@@ -3,13 +3,14 @@
 import { useState } from "react";
 import styles from "./login.module.css";
 import Link from "next/link";
-import { SignIn, CaretLeft, GoogleLogo, FacebookLogo } from "@phosphor-icons/react";
+import { SignIn, CaretLeft, Eye, EyeSlash, Lock } from "@phosphor-icons/react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -29,20 +30,10 @@ export default function LoginPage() {
       
       router.push("/");
     } catch (err: any) {
-      setError(err.message || "Erro ao fazer login");
+      setError("E-mail ou senha incorretos.");
+      console.error(err);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleSocialLogin = async (provider: 'google' | 'facebook') => {
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider,
-      });
-      if (error) throw error;
-    } catch (err: any) {
-      alert(err.message);
     }
   };
 
@@ -78,14 +69,24 @@ export default function LoginPage() {
             
             <div className={styles.inputGroup}>
               <label htmlFor="password">Senha</label>
-              <input 
-                type="password" 
-                id="password" 
-                placeholder="••••••••" 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required 
-              />
+              <div style={{ position: 'relative' }}>
+                <input 
+                  type={showPassword ? "text" : "password"} 
+                  id="password" 
+                  placeholder="••••••••" 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required 
+                  style={{ paddingRight: '3rem' }}
+                />
+                <button 
+                  type="button" 
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', display: 'flex', alignItems: 'center' }}
+                >
+                  {showPassword ? <EyeSlash size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
             </div>
             
             <div className={styles.formOptions}>
@@ -101,21 +102,6 @@ export default function LoginPage() {
               {loading ? "Entrando..." : "Entrar"}
             </button>
           </form>
-          
-          <div className={styles.divider}>
-            <span>ou entre com</span>
-          </div>
-          
-          <div className={styles.socialLogin}>
-            <button className={styles.socialButton} onClick={() => handleSocialLogin('google')}>
-              <GoogleLogo size={20} weight="bold" />
-              Google
-            </button>
-            <button className={styles.socialButton} onClick={() => handleSocialLogin('facebook')}>
-              <FacebookLogo size={20} weight="bold" />
-              Facebook
-            </button>
-          </div>
           
           <div className={styles.loginFooter}>
             Não tem uma conta? <Link href="/register">Cadastre seu perfil</Link>
