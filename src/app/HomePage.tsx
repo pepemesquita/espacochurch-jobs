@@ -25,6 +25,7 @@ import {
 
 import { useEffect } from "react";
 import { supabase } from "@/lib/supabase";
+import { useRouter } from "next/navigation";
 
 const CATEGORIES = [
   "Todos",
@@ -45,6 +46,7 @@ export default function Home() {
   const [selectedProfile, setSelectedProfile] = useState<any | null>(null);
   const [profiles, setProfiles] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const directoryRef = useRef<HTMLElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
@@ -89,7 +91,13 @@ export default function Home() {
   };
 
   const handleAuthAction = (action: string) => {
-    alert(`${action} será implementado em breve!`);
+    if (action === "Login") {
+      router.push("/login");
+    } else if (action === "Suporte") {
+      window.location.href = "mailto:contato@espacochurch.com";
+    } else {
+      alert(`${action} será implementado em breve!`);
+    }
   };
 
   const filteredProfiles = activeCategory === "Todos"
