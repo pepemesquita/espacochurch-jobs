@@ -336,17 +336,18 @@ export default function ProfilePage() {
               <h2 className={styles.sectionTitle}>Contatos e Redes</h2>
               <div className={styles.inputGrid}>
                 <div className={styles.inputGroup}>
-                  <label htmlFor="whatsapp"><WhatsappLogo size={18} weight="fill" /> WhatsApp</label>
+                  <label htmlFor="whatsapp"><WhatsappLogo size={18} weight="fill" /> WhatsApp (Obrigatório)</label>
                   <input 
                     type="text" 
                     id="whatsapp" 
                     placeholder="(00) 00000-0000" 
+                    required
                     value={formData.whatsapp}
                     onChange={handlePhoneChange}
                   />
                 </div>
                 <div className={styles.inputGroup}>
-                  <label htmlFor="instagram"><InstagramLogo size={18} weight="fill" /> Instagram (@)</label>
+                  <label htmlFor="instagram"><InstagramLogo size={18} weight="fill" /> Instagram (Opcional)</label>
                   <input 
                     type="text" 
                     id="instagram" 
@@ -356,7 +357,7 @@ export default function ProfilePage() {
                   />
                 </div>
                 <div className={styles.inputGroup}>
-                  <label htmlFor="linkedin"><LinkedinLogo size={18} weight="fill" /> LinkedIn (URL)</label>
+                  <label htmlFor="linkedin"><LinkedinLogo size={18} weight="fill" /> LinkedIn (Opcional)</label>
                   <input 
                     type="url" 
                     id="linkedin" 
@@ -366,7 +367,7 @@ export default function ProfilePage() {
                   />
                 </div>
                 <div className={styles.inputGroup}>
-                  <label htmlFor="website"><Globe size={18} /> Site ou Portfólio</label>
+                  <label htmlFor="website"><Globe size={18} /> Site ou Portfólio (Opcional)</label>
                   <input 
                     type="url" 
                     id="website" 
